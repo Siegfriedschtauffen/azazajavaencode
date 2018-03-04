@@ -3,34 +3,20 @@ import java.util.Scanner;
 class Shifrator {
     private String message;
     private String encodedMessage;
-    private String decodedMessage;
     private int password;
 
-    void setMsg(String message){
+    // метод принимающий текст и пароль, после чего созраняет их в переменных message и password
+    void setMsgAndPass(String message, String password){
         this.message = message;
-    }
-
-    void setKey(String password){
         for (int i=0;i<password.length();i++)
             this.password += password.charAt(i);
     }
-
-    String getMessage(){
-        return message;
+    // просто рамка
+    void ramka(){
+        System.out.println("\n====================================" +
+                "==============================================\n");
     }
-
-    String getEncodedMessage(){
-        return encodedMessage;
-    }
-
-    String getDecodedMessage(){
-        return decodedMessage;
-    }
-
-    int getPassword(){
-        int
-    }
-
+    // метод, который зашифровывает текст, ну и, на всякий случай, сохраняет шифр в переменной encodeMessage
     String encode(){
         encodedMessage ="";
         for (int i = 0; i< message.length(); i++)
@@ -38,116 +24,54 @@ class Shifrator {
             encodedMessage += (char) (message.charAt(i) ^ this.password);
         return encodedMessage;
     }
-
-
-
-    String decode(String encode_msg, String key){
-        encodedMessage = encode_msg;
-        pass = key;
-        decodedMessage ="";
-        for (int i=0;i<pass.length();i++)
-            this.password += (pass.charAt(i));
-        // дешифровать сообщение
-        for (int i = 0; i< encodedMessage.length(); i++)
-            // Построение дешифрованной строки сообщения.
-            decodedMessage = decodedMessage + (char) (encodedMessage.charAt(i) ^ this.password);
-        return decodedMessage;
+    // метод сканирующий текст (создан, чтобы не создавать многократно объект класса Scanner)
+    String scanText(){
+        Scanner scan = new Scanner(System.in);
+        String msg = scan.nextLine();
+        return msg;
     }
-
-    String getencmsg(){
-        return encodedMessage;
+    String scanPass(){
+        Scanner scan = new Scanner(System.in);
+        String pass = scan.nextLine();
+        return pass;
     }
-
-    void ramka(){
-        System.out.println("\n====================================" +
-                "==============================================\n");
-    }
-    void errormsg(String text){
-        System.out.println(text);
-    }
-
-
-
-
 }
 
 public class Maza {
     public static void main(String[] args) {
         Shifrator shifrator = new Shifrator();
 
-        done:
-        for (;;) {
+        for (; ; ) {
+            // рамка
             shifrator.ramka();
-            System.out.println("Выберите м нажмите Enter\n");
-            System.out.println("\t\"1\" чтобы зашифровать текст");
-            System.out.println("\t\"2\" чтобы расшифровать текст\n");
-            System.out.println("\"q\" чтобы выйти из программы");
-            System.out.print("\nВыберите действие: ");
-            Scanner sc = new Scanner(System.in);
-            String choice = sc.nextLine();
-            done2:
-            switch (choice) {
-                case "1":
-                    for (; ; ) {
-                        shifrator.ramka();
 
-                        System.out.print("\tВведите текст: ");
-                        Scanner scanMessage = new Scanner(System.in);
-                        String message = scanMessage.nextLine();
-                        shifrator.setMsg(message);
+            // ввод текста или шифра)
+            System.out.print("\tТекст: ");
+            Scanner scanMsg = new Scanner(System.in);
+            String message = scanMsg.nextLine();
 
-                        // создать пароль шифра
-                        System.out.print("\tСоздайте пароль шифра: ");
-                        Scanner scanPass = new Scanner(System.in);
-                        String pass = scanPass.nextLine();
-                        shifrator.setKey(pass);
-                        String encodedMessage = shifrator.encode();
+            // ввод пароля
+            System.out.print("\tПароль шифра: ");
+            Scanner scanPass = new Scanner(System.in);
+            String pass = scanPass.nextLine();
 
-                        System.out.println("\n\tВаш зашифрованный текст: ");
-                        System.out.println("\t\t" + encodedMessage);
+            // вызов метода шифровки текста или дешифроки
+            shifrator.setMsgAndPass(message, pass);
 
-                        shifrator.ramka();
+            // отображения результата (шифр либо дешифрованный текст)
+            String encodedMessage = shifrator.encode();
+            System.out.println("\n\tВаш зашифрованный текст: ");
+            System.out.println("\t\t" + encodedMessage);
 
-                        for (;;){
-                            System.out.print("Продолжить? (y/n): ");
-                            Scanner sc2 = new Scanner(System.in);
-                            String q = sc2.nextLine();
-                            if (q.equals("n")) break done2;
-                            if (q.equals("y")) break;
-                        }
-                    }
-                case "2":
-                    for (; ; ) {
-                        shifrator.ramka();
-                        System.out.print("\tВведите зашифврованный текст: ");
-                        Scanner msgscan2 = new Scanner(System.in);
-                        String shifr = msgscan2.nextLine();
+            // рамка
+            shifrator.ramka();
 
-                        System.out.print("\tВведите пароль): ");
-                        Scanner keyscan2 = new Scanner(System.in);
-                        String key2 = keyscan2.nextLine();
+            // операция выхода из цикла (соответсвенно из программы), либо его продолжения
+            System.out.print("Для выхода нажмите q, для продолжения нажмите что угодно: ");
+            Scanner scanQ = new Scanner(System.in);
+            String q = scanQ.nextLine();
 
-                        Shifrator rashif = new Shifrator();
-                        System.out.println("\n\tВаш расшифрованный текст: " + "\n\t\t" + rashif.decode(shifr, key2));
-                        shifrator.ramka();
-
-                        for (;;){
-                            System.out.print("Продолжить? (y/n): ");
-                            Scanner sc2 = new Scanner(System.in);
-                            String q = sc2.nextLine();
-                            if (q.equals("n")) break done2;
-                            if (q.equals("y")) break;
-                        }
-                    }
-                case "q":
-                    break done;
-                default:
-                    shifrator.ramka();
-                    shifrator.errormsg("\tЭй! Выбирай из списка! Че, слепой!? >_< " +
-                            "Написано же, выбрать \"1\", \"2\" или \"q\"! \n\tДавай давай, поновой!");
-            }
-
-
+            if (q.equals("q")) break;
         }
     }
 }
