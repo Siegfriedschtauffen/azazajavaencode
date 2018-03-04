@@ -7,6 +7,8 @@ class Shifrator {
 
     // метод принимающий текст и пароль, после чего созраняет их в переменных message и password
     void setMsgAndPass(String message, String password){
+        this.message ="";
+        this.password = 0;
         this.message = message;
         for (int i=0;i<password.length();i++)
             this.password += password.charAt(i);
@@ -30,11 +32,6 @@ class Shifrator {
         String msg = scan.nextLine();
         return msg;
     }
-    String scanPass(){
-        Scanner scan = new Scanner(System.in);
-        String pass = scan.nextLine();
-        return pass;
-    }
 }
 
 public class Maza {
@@ -47,13 +44,11 @@ public class Maza {
 
             // ввод текста или шифра)
             System.out.print("\tТекст: ");
-            Scanner scanMsg = new Scanner(System.in);
-            String message = scanMsg.nextLine();
+            String message = shifrator.scanText();
 
             // ввод пароля
             System.out.print("\tПароль шифра: ");
-            Scanner scanPass = new Scanner(System.in);
-            String pass = scanPass.nextLine();
+            String pass = shifrator.scanText();
 
             // вызов метода шифровки текста или дешифроки
             shifrator.setMsgAndPass(message, pass);
@@ -68,11 +63,9 @@ public class Maza {
 
             // операция выхода из цикла (соответсвенно из программы), либо его продолжения
             System.out.print("Для выхода нажмите q, для продолжения нажмите что угодно: ");
-            Scanner scanQ = new Scanner(System.in);
-            String q = scanQ.nextLine();
+            String q = shifrator.scanText();
 
             if (q.equals("q")) break;
         }
     }
 }
-
