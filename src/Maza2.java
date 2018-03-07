@@ -1,43 +1,46 @@
 import java.util.Scanner;
 
-class Shifrator {
-    private String message;
-    private int password;
+/*
+ Изменение кода программы 1.
 
-    // метод принимающий текст и пароль, после чего созраняет их в переменных message и password
-    // пароль конвертируется из символьного в числовой тип путем сложения числовых значений всех символов
-    void setMsgAndPass(String message, String password){
-        this.message ="";
-        this.password = 0;
-        this.message = message;
-        for (int i=0;i<password.length();i++)
-            this.password += password.charAt(i);
-    }
+     Объеденены в один метод encode два метода.
+     Один из них принимал значения текста и пароля, другой шифровал их.
+     Также удалены переменные, хранящие данные текста и пароля, в классе Shifrator2, за ненадобностью.
+     Таким обрахом удалось существенно сократить код.
+*/
+class Shifrator2 {
+
     // просто рамка
     void ramka(){
         System.out.println("\n====================================" +
                 "==============================================\n");
-    }
-    // метод, который зашифровывает текст
-    String encode(){
-        StringBuilder encMsg = new StringBuilder();
-        for (int i = 0; i< message.length(); i++)
-            // Построение зашифрованной строки сообщения.
-            encMsg.append((char) (message.charAt(i) ^ password));
-        return encMsg.toString();
     }
     // метод сканирующий текст (создан, чтобы не создавать многократно объект класса Scanner)
     String scanText(){
         Scanner scan = new Scanner(System.in);
         return scan.nextLine();
     }
+    // метод принимающий в качестве параметра данные (текст и пароль)
+    // для дальнейшей шифровки или дешифровки текста
+    // и его возврата
+    String encode (String message, String password){
+        StringBuilder encMsg = new StringBuilder();
+        // преобразование строкового пароля в числовой путем сложения
+        // числовых значений всех символов строкового пароля
+        int encPass=0;
+        for (int i=0;i<password.length();i++)
+            encPass += password.charAt(i);
+        for (int i = 0; i< message.length(); i++)
+            // Построение зашифрованной строки сообщения.
+            encMsg.append((char) (message.charAt(i) ^ encPass));
+        return encMsg.toString();
+    }
 }
 
-public class Maza {
+public class Maza2 {
     public static void main(String[] args) {
         Shifrator2 shifrator = new Shifrator2();
         String q;
-        // бесконечный цикл повторения программы
         do {
             // рамка
             shifrator.ramka();
@@ -50,10 +53,7 @@ public class Maza {
             System.out.print("\tПароль шифра: ");
             String pass = shifrator.scanText();
 
-            // вызов метода принимающего текст и пароль
-           // shifrator.setMsgAndPass(message, pass);
-
-            // вызов метода шифровки или дешифровки текста и присваивание результата переменной
+            // вызов
             String encodedMessage = shifrator.encode(message,pass);
 
             // отображения результата (шифрованный либо дешифрованный текст)
