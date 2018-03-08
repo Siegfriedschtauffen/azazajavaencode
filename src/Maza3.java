@@ -1,5 +1,4 @@
 import java.util.Scanner;
-
 /*
  Изменение кода программы 2.
 
@@ -12,7 +11,6 @@ class Shifrator3 {
     private String encMsg;
     private String strPass;
     private int intPass;
-
 
     // просто рамка
     void ramka(){
@@ -52,22 +50,22 @@ class Shifrator3 {
 public class Maza3 {
     public static void main(String[] args) {
         Shifrator3 shifrator = new Shifrator3();
-        String q;
+        String q,message,pass;
         do {
             // рамка
             shifrator.ramka();
 
             // ввод текста или шифра с клавиатуры
             System.out.print("\tТекст: ");
-            String message = shifrator.scanText();
+            message = shifrator.scanText();
 
             // ввод пароля с клавиатуры
             System.out.print("\tПароль шифра: ");
-            String pass = shifrator.scanText();
+            pass = shifrator.scanText();
 
             // вызов метода принимающего в качестве параметра данные (текст и пароль)
             // для дальнейшей шифровки или дешифровки текста с паролем и возврата их значений
-            String encodedMessage = shifrator.encode(message.isEmpty()?"azaza":message,pass);
+            String encodedMessage = shifrator.encode(message,pass);
 
             // отображения результата (шифрованный либо дешифрованный текст)
             System.out.println("\n\tВаш зашифрованный текст: ");
@@ -80,6 +78,6 @@ public class Maza3 {
             System.out.print("Для выхода нажмите q, для продолжения нажмите что угодно: ");
             q = shifrator.scanText();
 
-        }while (!q.equals("q"));// условие завершения цикла (соответсвенно программы) при нажатии "q"
+        }while (!q.equals("q")); // условие завершения цикла (соответсвенно программы) при нажатии "q"
     }
 }

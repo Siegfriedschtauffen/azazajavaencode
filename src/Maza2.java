@@ -7,23 +7,24 @@ import java.util.Scanner;
      Один из них принимал значения текста и пароля, другой шифровал их.
      Также удалены переменные, хранящие данные текста и пароля, в классе Shifrator2, за ненадобностью.
      Таким обрахом удалось существенно сократить код.
+     Сделал методы статическими, таким образом ненужно создавать объект класса.
 */
 class Shifrator2 {
 
     // просто рамка
-    void ramka(){
+    static void ramka(){
         System.out.println("\n====================================" +
                 "==============================================\n");
     }
     // метод сканирующий текст (создан, чтобы не создавать многократно объект класса Scanner)
-    String scanText(){
+    static String scanText(){
         Scanner scan = new Scanner(System.in);
         return scan.nextLine();
     }
     // метод принимающий в качестве параметра данные (текст и пароль)
     // для дальнейшей шифровки или дешифровки текста
     // и его возврата
-    String encode (String message, String password){
+    static String encode (String message, String password){
         StringBuilder encMsg = new StringBuilder();
         // преобразование строкового пароля в числовой путем сложения
         // числовых значений всех символов строкового пароля
@@ -39,33 +40,32 @@ class Shifrator2 {
 
 public class Maza2 {
     public static void main(String[] args) {
-        Shifrator2 shifrator = new Shifrator2();
         String q;
         do {
             // рамка
-            shifrator.ramka();
+            Shifrator2.ramka();
 
             // ввод текста или шифра с клавиатуры
             System.out.print("\tТекст: ");
-            String message = shifrator.scanText();
+            String message = Shifrator2.scanText();
 
             // ввод пароля с клавиатуры
             System.out.print("\tПароль шифра: ");
-            String pass = shifrator.scanText();
+            String pass = Shifrator2.scanText();
 
             // вызов
-            String encodedMessage = shifrator.encode(message,pass);
+            String encodedMessage = Shifrator2.encode(message,pass);
 
             // отображения результата (шифрованный либо дешифрованный текст)
             System.out.println("\n\tВаш зашифрованный текст: ");
             System.out.println("\t\t" + encodedMessage);
 
             // рамка
-            shifrator.ramka();
+            Shifrator2.ramka();
 
             // ввод с клавиатуры символа q для завершения цикла
             System.out.print("Для выхода нажмите q, для продолжения нажмите что угодно: ");
-            q = shifrator.scanText();
+            q = Shifrator2.scanText();
 
         }while (!q.equals("q"));// условие завершения цикла (соответсвенно программы) при нажатии "q"
     }
