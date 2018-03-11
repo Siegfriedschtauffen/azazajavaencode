@@ -35,7 +35,7 @@ class Shifrator {
 
 public class Maza {
     public static void main(String[] args) {
-        Shifrator2 shifrator = new Shifrator2();
+        Shifrator shifrator = new Shifrator();
         String q;
         // бесконечный цикл повторения программы
         do {
@@ -51,10 +51,10 @@ public class Maza {
             String pass = shifrator.scanText();
 
             // вызов метода принимающего текст и пароль
-           // shifrator.setMsgAndPass(message, pass);
+            shifrator.setMsgAndPass(message, pass);
 
             // вызов метода шифровки или дешифровки текста и присваивание результата переменной
-            String encodedMessage = shifrator.encode(message,pass);
+            String encodedMessage = shifrator.encode();
 
             // отображения результата (шифрованный либо дешифрованный текст)
             System.out.println("\n\tВаш зашифрованный текст: ");

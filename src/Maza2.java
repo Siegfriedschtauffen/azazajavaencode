@@ -16,11 +16,7 @@ class Shifrator2 {
         System.out.println("\n====================================" +
                 "==============================================\n");
     }
-    // метод сканирующий текст (создан, чтобы не создавать многократно объект класса Scanner)
-    static String scanText(){
-        Scanner scan = new Scanner(System.in);
-        return scan.nextLine();
-    }
+
     // метод принимающий в качестве параметра данные (текст и пароль)
     // для дальнейшей шифровки или дешифровки текста
     // и его возврата
@@ -40,6 +36,7 @@ class Shifrator2 {
 
 public class Maza2 {
     public static void main(String[] args) {
+        Scanner scan = new Scanner(System.in);
         String q;
         do {
             // рамка
@@ -47,11 +44,11 @@ public class Maza2 {
 
             // ввод текста или шифра с клавиатуры
             System.out.print("\tТекст: ");
-            String message = Shifrator2.scanText();
+            String message = scan.nextLine();
 
             // ввод пароля с клавиатуры
             System.out.print("\tПароль шифра: ");
-            String pass = Shifrator2.scanText();
+            String pass = scan.nextLine();
 
             // вызов
             String encodedMessage = Shifrator2.encode(message,pass);
@@ -65,7 +62,7 @@ public class Maza2 {
 
             // ввод с клавиатуры символа q для завершения цикла
             System.out.print("Для выхода нажмите q, для продолжения нажмите что угодно: ");
-            q = Shifrator2.scanText();
+            q = scan.nextLine();
 
         }while (!q.equals("q"));// условие завершения цикла (соответсвенно программы) при нажатии "q"
     }
